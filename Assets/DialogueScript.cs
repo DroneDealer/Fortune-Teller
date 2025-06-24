@@ -35,8 +35,9 @@ public class DialogueScript : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
 
-        isTyping = true;
-        lineFinished = false;
+        isTyping = false;
+        lineFinished = true;
+        continueIndicator.SetActive(true);
     }
     void NextLine()
     {
