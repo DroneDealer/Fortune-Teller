@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 5c1253f48fe1a5048ba5e4ac5a168611
+guid: 62dafee7cbf228148bff2908c89430fb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1649117758725162082
-    second: Crystal Ball_0
-  - first:
-      213: -8953382069086584531
-    second: Crystal Ball_1
+      213: 2080453814892173801
+    second: Fortune Teller Tent_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,34 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crystal Ball_0
+      name: Fortune Teller Tent_0
       rect:
         serializedVersion: 2
         x: 518
-        y: 478
-        width: 241
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2640a993dd7d2e610800000000000000
-      internalID: 1649117758725162082
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Crystal Ball_1
-      rect:
-        serializedVersion: 2
-        x: 771
         y: 238
-        width: 431
+        width: 684
         height: 419
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d210eb9f1723fb380800000000000000
-      internalID: -8953382069086584531
+      spriteID: 9e91140d8b14fdc10800000000000000
+      internalID: 2080453814892173801
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Crystal Ball_0: 1649117758725162082
-      Crystal Ball_1: -8953382069086584531
+      Fortune Teller Tent_0: 2080453814892173801
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
