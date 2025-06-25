@@ -1,20 +1,24 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+
 public class DialogueScript : MonoBehaviour
 {
     public TextMeshProUGUI textBox;
-
+    public GameObject dialogueBubble;
     public GameObject continueIndicator;
     public string[] lines;
     public float delay = 0.03f;
     private int index = 0;
     private bool isTyping = false;
-    private bool lineFinished = false;
+
+    public FinalZoom cameraZoom;  // Add this, assign in Inspector
+
     private void Start()
     {
         StartCoroutine(TypeText());
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isTyping)
@@ -22,10 +26,10 @@ public class DialogueScript : MonoBehaviour
             NextLine();
         }
     }
+
     public IEnumerator TypeText()
     {
         isTyping = true;
-        lineFinished = false;
         continueIndicator.SetActive(false);
         textBox.text = "";
 
@@ -36,9 +40,9 @@ public class DialogueScript : MonoBehaviour
         }
 
         isTyping = false;
-        lineFinished = true;
         continueIndicator.SetActive(true);
     }
+
     void NextLine()
     {
         continueIndicator.SetActive(false);
@@ -49,9 +53,16 @@ public class DialogueScript : MonoBehaviour
         }
         else
         {
-            textBox.text = "";
+            textBox.gameObject.SetActive(false);
+            continueIndicator.SetActive(false);
+            dialogueBubble.SetActive(false);
             Debug.Log("End of dialogue");
-            //add more to trigger next game action here (if nessecary for text)
+
+            // Trigger camera zoom here:
+            if (cameraZoom != null)
+            {
+                cameraZoom.StartZoom();
+            }
         }
     }
 }

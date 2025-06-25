@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DialogueScript.cs" />
+    <Compile Include="Assets\FinalZoom.cs" />
+    <Compile Include="Assets\NewEmptyCSharpScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
