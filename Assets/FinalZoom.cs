@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class FinalZoom : MonoBehaviour
@@ -9,13 +10,20 @@ public class FinalZoom : MonoBehaviour
 
     private float originalSize;
     private bool zooming = false;
+    public float threshold = 0.01f;
 
+    public GameObject WorldCanvas;
+    public GameObject CameraCanvas;
+    public bool showWorldCanvasAfterZoom = true;
     void Start()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
 
         originalSize = mainCamera.orthographicSize;
+
+        WorldCanvas.SetActive(true);
+        CameraCanvas.SetActive(false);
     }
 
     void Update()
@@ -28,6 +36,15 @@ public class FinalZoom : MonoBehaviour
             // Smoothly move camera toward the target's position (keep z same)
             Vector3 newPos = new Vector3(zoomTarget.position.x, zoomTarget.position.y, mainCamera.transform.position.z);
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, newPos, Time.deltaTime * zoomSpeed);
+
+            bool sizeClose = Mathf.Abs(mainCamera.orthographicSize - targetSize) < threshold;
+            bool posClose = Vector3.Distance(mainCamera.transform.position, newPos) < threshold;
+
+            if (sizeClose && posClose)
+            {
+                zooming = false;
+                SwitchAfterZoom(false);
+            }
         }
     }
 
@@ -42,5 +59,28 @@ public class FinalZoom : MonoBehaviour
     {
         zooming = false;
         mainCamera.orthographicSize = originalSize;
+    }
+
+    void SwitchAfterZoom(bool showFirstCanvas)
+    {
+        if (showFirstCanvas)
+        {
+            showWorldCanvas();
+        }
+        else
+        {
+            showCameraCanvas();
+        }
+    }
+    void showWorldCanvas()
+    {
+        WorldCanvas.SetActive(true);
+        CameraCanvas.SetActive(false);
+    }
+
+    void showCameraCanvas()
+    {
+        WorldCanvas.SetActive(false);
+        CameraCanvas.SetActive(true);
     }
 }
