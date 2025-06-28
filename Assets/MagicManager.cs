@@ -14,20 +14,24 @@ public class MagicManager : MonoBehaviour
     private void Start()
     {
         initialScale = ResponseText.transform.localScale;
-        ResponseText.transform.localScale = Vector3.zero;  // Start hidden (tiny)
+        ResponseText.transform.localScale = Vector3.zero;
+        ButtonOptions.SetActive(false);
         TryAgainButton.SetActive(false);
         foreach (Transform child in ButtonOptions.transform)
         {
             child.gameObject.SetActive(false);
         }
+        ButtonOptions.SetActive(true);
+        StartCoroutine(SlideInButtons());
     }
 
     void ShowResponse(string message)
     {
+        Debug.Log("ShowResponse called!");
         StopAllCoroutines();
-        ResponseText.text = "";
         ButtonOptions.SetActive(false);
         TryAgainButton.SetActive(false);
+        ResponseText.text = "";
         ResponseText.transform.localScale = Vector3.zero;
         StartCoroutine(ShowResponseSequence(message));
 
@@ -38,8 +42,6 @@ public class MagicManager : MonoBehaviour
         yield return StartCoroutine(ZoomInEffect());
         yield return StartCoroutine(TypeText(message));
         TryAgainButton.SetActive(true);
-        ButtonOptions.SetActive(true);
-        yield return StartCoroutine(SlideInButtons());
     }
     IEnumerator ZoomInEffect()
     {
@@ -68,14 +70,18 @@ public class MagicManager : MonoBehaviour
 
     public void OnTryAgainClicked()
     {
-        ButtonOptions.SetActive(true);
+
+        TryAgainButton.SetActive(false);
         ResponseText.text = "";
         ResponseText.transform.localScale = Vector3.zero;
-        TryAgainButton.SetActive(false);
+        ButtonOptions.SetActive(true);
+        StartCoroutine(SlideInButtons());
+
     }
 
     IEnumerator SlideInButtons()
     {
+        Debug.Log("Sliding in buttons...");
         ButtonGroup.alpha = 1f;
         ButtonGroup.interactable = false;
         ButtonGroup.blocksRaycasts = false;
@@ -87,23 +93,25 @@ public class MagicManager : MonoBehaviour
         foreach (Transform child in ButtonOptions.transform)
         {
             GameObject button = child.gameObject;
+            button.SetActive(true);
+
             RectTransform rect = button.GetComponent<RectTransform>();
 
-            Vector2 StartPos = rect.anchoredPosition + Vector2.left * SlideDistance;
-            Vector2 EndPos = rect.anchoredPosition;
-
-            rect.anchoredPosition = StartPos;
-            button.SetActive(true);
+            Vector2 endPos = rect.anchoredPosition;
+            Vector2 startPos = endPos + Vector2.left * SlideDistance;
+            rect.anchoredPosition = startPos;
 
             float t = 0f;
             while (t < duration)
             {
                 t += Time.deltaTime;
                 float normalized = t / duration;
-                rect.anchoredPosition = Vector2.Lerp(StartPos, EndPos, Mathf.SmoothStep(0, 1, normalized));
+                rect.anchoredPosition = Vector2.Lerp(startPos, endPos, Mathf.SmoothStep(0, 1, normalized));
                 yield return null;
             }
-            rect.anchoredPosition = EndPos;
+            rect.anchoredPosition = endPos;
+
+            yield return new WaitForSeconds(delay);
 
 
         }
