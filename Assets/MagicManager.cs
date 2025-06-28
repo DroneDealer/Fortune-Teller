@@ -1,106 +1,76 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class MagicManager : MonoBehaviour
 {
     public TMP_Text ResponseText;
     public GameObject ButtonOptions;
+    private Vector3 initialScale = Vector3.one;
+
     public GameObject TryAgainButton;
-    public CanvasGroup ButtonGroup;
-    private Vector3 initialScale;
 
     private void Start()
     {
-        initialScale = ResponseText.transform.localScale;
-        ResponseText.transform.localScale = Vector3.zero;
-        ResponseText.text = "";
-        ButtonOptions.SetActive(true);
-        ButtonGroup.alpha = 0f;
-        ButtonGroup.interactable = false;
-        ButtonGroup.blocksRaycasts = false;
         TryAgainButton.SetActive(false);
-        StartCoroutine(FadeInButtons());
-    }
-
-    IEnumerator FadeInButtons()
-    {
-        float fadeDuration = 1f;
-        float elapsed = 0f;
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-            ButtonGroup.alpha = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
-            yield return null;
-        }
-        ButtonGroup.alpha = 1f;
-        ButtonGroup.interactable = true;
-        ButtonGroup.blocksRaycasts = true;
+        initialScale = new Vector3(1f, 1f, 1f);  // grab the *correct* initial scale from your Text object
+        Debug.Log("Initial scale: " + initialScale);
+        ResponseText.gameObject.SetActive(true);
     }
 
     void ShowResponse(string message)
     {
-        Debug.Log("ShowResponse called!");
-        StopAllCoroutines();
-        ResponseText.text = "";
+        ResponseText.gameObject.SetActive(true);
+        ResponseText.text = message;
+        ResponseText.transform.localScale = Vector3.zero;
         ButtonOptions.SetActive(false);
         TryAgainButton.SetActive(false);
-        StartCoroutine(ShowSequence(message));
+        StartCoroutine(ZoomInAndShowTryAgain());
+        Debug.Log("Final scale: " + ResponseText.transform.localScale);
 
-    }
-
-    IEnumerator ShowSequence(string message)
-    {
-        yield return StartCoroutine(ZoomInEffect());
-        yield return StartCoroutine(TypeText(message));
-        TryAgainButton.SetActive(true);
     }
     IEnumerator ZoomInEffect()
     {
         float duration = 1f;
         float elapsed = 0f;
-        Vector3 targetScale = initialScale;
+        Vector3 startScale = Vector3.zero;
+        Vector3 endScale = Vector3.one;
 
         while (elapsed < duration)
         {
-            ResponseText.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, elapsed / duration);
             elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            ResponseText.transform.localScale = Vector3.Lerp(Vector3.zero, endScale, t);
             yield return null;
         }
-        ResponseText.transform.localScale = targetScale;
-    }
+        ResponseText.transform.localScale = endScale;
 
-    IEnumerator TypeText(string message)
+    }
+    IEnumerator ZoomInAndShowTryAgain()
     {
-        ResponseText.text = "";
-        foreach (char c in message)
-        {
-            ResponseText.text += c;
-            yield return new WaitForSeconds(0.025f);
-        } 
+        yield return StartCoroutine(ZoomInEffect());
+        TryAgainButton.SetActive(true);
     }
 
     public void OnTryAgainClicked()
     {
+        ButtonOptions.SetActive(true);
         ResponseText.text = "";
         ResponseText.transform.localScale = Vector3.zero;
         TryAgainButton.SetActive(false);
-        ButtonOptions.SetActive(true);
-        StartCoroutine(FadeInButtons());
-
     }
     public void OnLoveCLicked()
     {
         ShowResponse(GetRandomResponse(new string[]
         {
-            "Beware of love potions crafted with glitter - the effects will never wear off!",
+            "Beware of love potions crafted with glitter - the effects last ages!",
             "In three arcane cycles' time, you will be struck with Cupid's arrow - just make sure he hits your heart rather than your head!",
             "Only the enchanted goblet of root beer can unlcok your romantic destiny.",
             "Your heart will be stolen by a mischievious creature - please make sure to get it back before it's sacrificed in a blood ritual!",
             "Your true love’s name is hidden inside the terms and conditions of a dating app.",
             "Romance will bloom once you hand-deliver a heart-shaped chicken nugget.",
-            "Love spells are 65% ore effective when cast with a glitter pen."
+            "Love spells are 65% more effective when cast with a glitter pen."
         }));
 
     }
@@ -190,15 +160,16 @@ public class MagicManager : MonoBehaviour
     }
     public void OnDreamsCLicked()
     {
-        ShowResponse(GetRandomResponse(new string[]
+        ResponseText.text = GetRandomResponse(new string[]
         {
             "You will soar on the back of a flying toaster. Don’t ask why.",
-            "WATER BUCKET RELEASE"//placeholder
-        }));
+            "WATER BUCKET RELEASE"
+        });
     }
 
     private string GetRandomResponse(string[] responses)
     {
         return responses[Random.Range(0, responses.Length)];
     }
+
 }
