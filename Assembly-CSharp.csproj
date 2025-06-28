@@ -52,7 +52,6 @@
     <Compile Include="Assets\DialogueScript.cs" />
     <Compile Include="Assets\PromptSubmit.cs" />
     <Compile Include="Assets\FinalZoom.cs" />
-    <Compile Include="Assets\NewEmptyCSharpScript.cs" />
     <Compile Include="Assets\MagicManager.cs" />
   </ItemGroup>
   <ItemGroup>

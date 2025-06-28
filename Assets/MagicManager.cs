@@ -15,29 +15,42 @@ public class MagicManager : MonoBehaviour
     {
         initialScale = ResponseText.transform.localScale;
         ResponseText.transform.localScale = Vector3.zero;
-        ButtonOptions.SetActive(false);
-        TryAgainButton.SetActive(false);
-        foreach (Transform child in ButtonOptions.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
+        ResponseText.text = "";
         ButtonOptions.SetActive(true);
-        StartCoroutine(SlideInButtons());
+        ButtonGroup.alpha = 0f;
+        ButtonGroup.interactable = false;
+        ButtonGroup.blocksRaycasts = false;
+        TryAgainButton.SetActive(false);
+        StartCoroutine(FadeInButtons());
+    }
+
+    IEnumerator FadeInButtons()
+    {
+        float fadeDuration = 1f;
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            ButtonGroup.alpha = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
+            yield return null;
+        }
+        ButtonGroup.alpha = 1f;
+        ButtonGroup.interactable = true;
+        ButtonGroup.blocksRaycasts = true;
     }
 
     void ShowResponse(string message)
     {
         Debug.Log("ShowResponse called!");
         StopAllCoroutines();
+        ResponseText.text = "";
         ButtonOptions.SetActive(false);
         TryAgainButton.SetActive(false);
-        ResponseText.text = "";
-        ResponseText.transform.localScale = Vector3.zero;
-        StartCoroutine(ShowResponseSequence(message));
+        StartCoroutine(ShowSequence(message));
 
     }
 
-    IEnumerator ShowResponseSequence(string message)
+    IEnumerator ShowSequence(string message)
     {
         yield return StartCoroutine(ZoomInEffect());
         yield return StartCoroutine(TypeText(message));
@@ -70,57 +83,13 @@ public class MagicManager : MonoBehaviour
 
     public void OnTryAgainClicked()
     {
-
-        TryAgainButton.SetActive(false);
         ResponseText.text = "";
         ResponseText.transform.localScale = Vector3.zero;
+        TryAgainButton.SetActive(false);
         ButtonOptions.SetActive(true);
-        StartCoroutine(SlideInButtons());
+        StartCoroutine(FadeInButtons());
 
     }
-
-    IEnumerator SlideInButtons()
-    {
-        Debug.Log("Sliding in buttons...");
-        ButtonGroup.alpha = 1f;
-        ButtonGroup.interactable = false;
-        ButtonGroup.blocksRaycasts = false;
-
-        float delay = 0.05f;
-        float SlideDistance = 200f;
-        float duration = 0.3f;
-
-        foreach (Transform child in ButtonOptions.transform)
-        {
-            GameObject button = child.gameObject;
-            button.SetActive(true);
-
-            RectTransform rect = button.GetComponent<RectTransform>();
-
-            Vector2 endPos = rect.anchoredPosition;
-            Vector2 startPos = endPos + Vector2.left * SlideDistance;
-            rect.anchoredPosition = startPos;
-
-            float t = 0f;
-            while (t < duration)
-            {
-                t += Time.deltaTime;
-                float normalized = t / duration;
-                rect.anchoredPosition = Vector2.Lerp(startPos, endPos, Mathf.SmoothStep(0, 1, normalized));
-                yield return null;
-            }
-            rect.anchoredPosition = endPos;
-
-            yield return new WaitForSeconds(delay);
-
-
-        }
-
-        ButtonGroup.interactable = true;
-        ButtonGroup.blocksRaycasts = true;
-    }
-
-
     public void OnLoveCLicked()
     {
         ShowResponse(GetRandomResponse(new string[]
