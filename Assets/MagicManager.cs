@@ -160,11 +160,15 @@ public class MagicManager : MonoBehaviour
     }
     public void OnDreamsCLicked()
     {
-        ResponseText.text = GetRandomResponse(new string[]
+        ShowResponse(GetRandomResponse(new string[]
         {
-            "You will soar on the back of a flying toaster. Don’t ask why.",
-            "WATER BUCKET RELEASE"
-        });
+            "You chase greatness with fire in your eyes. Just don’t forget the map.",
+            "You’re sprinting up a staircase meant for climbing. Pace yourself — you’ll still reach the top.",
+            "A detour doesn’t mean defeat. Your path curves on purpose.",
+            "Your ambition is admirable. Your follow-through? Not so much...",
+            "The stars say: shoot your shot. But please, make sure to aim first.",
+            "Keep climbing. The view from the middle is wildly underappreciated."
+        }));
     }
 
     private string GetRandomResponse(string[] responses)

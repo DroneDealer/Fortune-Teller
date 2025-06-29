@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CanvasSwitch.cs" />
+    <Compile Include="Assets\Audio.cs" />
     <Compile Include="Assets\DialogueScript.cs" />
     <Compile Include="Assets\PromptSubmit.cs" />
     <Compile Include="Assets\FinalZoom.cs" />
