@@ -1,21 +1,21 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class MagicManager : MonoBehaviour
 {
     public TMP_Text ResponseText;
     public GameObject ButtonOptions;
-    private Vector3 initialScale = Vector3.one;
-
+    //private Vector3 initialScale = Vector3.one;
     public GameObject TryAgainButton;
+    public AudioSource audioSource;
+    public AudioClip crystalBallRevealSound;
 
     private void Start()
     {
         TryAgainButton.SetActive(false);
-        initialScale = new Vector3(1f, 1f, 1f);  // grab the *correct* initial scale from your Text object
-        Debug.Log("Initial scale: " + initialScale);
+        //initialScale = new Vector3(1f, 1f, 1f);
+        //Debug.Log("Initial scale: " + initialScale);
         ResponseText.gameObject.SetActive(true);
     }
 
@@ -23,6 +23,14 @@ public class MagicManager : MonoBehaviour
     {
         ResponseText.gameObject.SetActive(true);
         ResponseText.text = message;
+        if (audioSource != null && crystalBallRevealSound != null)
+        {
+            audioSource.PlayOneShot(crystalBallRevealSound);
+        }
+        else
+        {
+            Debug.Log("Either your audio manager or your audio clip are unassigned");
+        }
         ResponseText.transform.localScale = Vector3.zero;
         ButtonOptions.SetActive(false);
         TryAgainButton.SetActive(false);
@@ -41,7 +49,7 @@ public class MagicManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            ResponseText.transform.localScale = Vector3.Lerp(Vector3.zero, endScale, t);
+            ResponseText.transform.localScale = Vector3.Lerp(startScale, endScale, t);
             yield return null;
         }
         ResponseText.transform.localScale = endScale;
@@ -66,8 +74,8 @@ public class MagicManager : MonoBehaviour
         {
             "Beware of love potions crafted with glitter - the effects last ages!",
             "In three arcane cycles' time, you will be struck with Cupid's arrow - just make sure he hits your heart rather than your head!",
-            "Only the enchanted goblet of root beer can unlcok your romantic destiny.",
-            "Your heart will be stolen by a mischievious creature - please make sure to get it back before it's sacrificed in a blood ritual!",
+            "Only the enchanted goblet of miscellanious sludge can unlock your romantic destiny.",
+            "Your heart will be stolen by a mischievous creature - please make sure to get it back before it's sacrificed in a blood ritual!",
             "Your true love’s name is hidden inside the terms and conditions of a dating app.",
             "Romance will bloom once you hand-deliver a heart-shaped chicken nugget.",
             "Love spells are 65% more effective when cast with a glitter pen."
@@ -82,7 +90,7 @@ public class MagicManager : MonoBehaviour
             "Luck will strike after you juggle three rabbits' feet and bathe in the barf of two dozen leprechauns.",
             "The universe winks at you - or perhaps it's simply a traffic light.",
             "Fortune will favor you upon the alignment of the 3 moons in the sky.",
-            "All of the four leaf clovers in your vicinity run away from you the minute you step onto theri grounds. Try finding a 5 leaf one instead.",
+            "All of the four leaf clovers in your vicinity immediately wilt the minute you step onto their turf. I did not know that was possible. Congratulations. You mark a new level of unluckiness.",
             "Luck is on your side! Unless it's Tuesday. Then... oof."
         }));
     }
@@ -95,7 +103,7 @@ public class MagicManager : MonoBehaviour
             "The pen is mightier than the sword, but ChatGPT is mightier still.",
             "Master the runes of the arcane library, lest you be trapped in the academy for yet another year.",
             "Beware the tricksters who rearrange your thoughts before our exam, lest you forget everything you studied for.",
-            "Pepare yourself ofr your greatest challenge yet.",
+            "Pepare yourself for your greatest challenge yet.",
             "The gods of academia demand you sacrifice one (1) mechanical pencil.",
             "Wisdom is stored inside your school’s lost-and-found bin."
         }));
@@ -106,7 +114,7 @@ public class MagicManager : MonoBehaviour
         ShowResponse(GetRandomResponse(new string[]
         {
             "Your new friend may or may not be several dozen weasels in a very long trench coat.",
-            "Your future best freind is currently trapped inside a vending machine.",
+            "Your future best friend is currently trapped inside a vending machine.",
             "Be sure to befriend the new members at your next cult meeting.",
             "Your loyal companion awaits, bound by the oath of free food.",
             "The friendships you share with your comrades will last you several lifetimes and well into the afterlife as well!"
@@ -118,9 +126,9 @@ public class MagicManager : MonoBehaviour
         ShowResponse(GetRandomResponse(new string[]
         {
             "Beware the one who knows your search history.",
-            "Avoid eye cotact with any geese after exactly 5:29 PM.",
+            "Avoid eye contact with any geese after exactly 5:29 PM.",
             "Do not enter the kitchen while holding both a fork and negative thoughts.",
-            "The only way to remain safe tonight is to bathe in a barrrel of eels' eyes.",
+            "The only way to remain safe tonight is to bathe in a barrel of eels' eyes.",
             "Do not scream 'CHICKEN JOCKEY' this weekend, lest you be brutally attacked by an oncoming mob."
         }));
     }

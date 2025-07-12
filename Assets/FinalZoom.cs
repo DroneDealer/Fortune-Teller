@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FinalZoom : MonoBehaviour
 {
-    public Camera mainCamera;       // Assign your main camera in Inspector
+    public Camera mainCamera; // MainCamera gameObject. Using another camera is also an option but there is no point in this case
     public Transform zoomTarget;    // Assign the object to zoom into
     public float targetSize = 3f;   // How much to zoom in (smaller = closer)
     public float zoomSpeed = 2f;    // Speed of zooming
@@ -11,6 +11,8 @@ public class FinalZoom : MonoBehaviour
     private float originalSize;
     private bool zooming = false;
     public float threshold = 0.01f;
+    public AudioSource audioSource;
+    public AudioClip zoomSound;
 
     public GameObject WorldCanvas;
     public GameObject CameraCanvas;
@@ -48,9 +50,18 @@ public class FinalZoom : MonoBehaviour
         }
     }
 
-    // Call this to start zooming
+    // Call this to start zooming + sound effect
     public void StartZoom()
     {
+        if (audioSource != null && zoomSound != null)
+        {
+            audioSource.PlayOneShot(zoomSound);
+        }
+        else
+        {
+            Debug.Log("Audio source or zoom sound are unassigned!");
+        }
+        //zooming is like a curse bro i swear to god
         zooming = true;
     }
 

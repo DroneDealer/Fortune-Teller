@@ -11,6 +11,8 @@ public class DialogueScript : MonoBehaviour
     public float delay = 0.03f;
     private int index = 0;
     private bool isTyping = false;
+    public AudioClip clickClip;
+    public AudioSource audioSource;
 
     public FinalZoom cameraZoom;  // Add this, assign in Inspector
 
@@ -36,6 +38,10 @@ public class DialogueScript : MonoBehaviour
         foreach (char c in lines[index])
         {
             textBox.text += c;
+            if (!char.IsWhiteSpace(c) && clickClip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(clickClip);
+            }
             yield return new WaitForSeconds(delay);
         }
 
