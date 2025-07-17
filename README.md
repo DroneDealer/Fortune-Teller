@@ -1,17 +1,20 @@
 # Fortune Teller
 Upon interacting with the crystal ball, the player will find new threads of fate waiting to be woven... 
-This is a Unity - based 'fortune telling' game that gives ridiculous responses to your inquiries!
+Fortune Teller is a Unity-based game that delivers ridiculous responses to your most mystical inquiries!
+
+## Inspiration
+I wanted to learn how to create visually engaging games, and I thought: what better way to do that than with a bit of magic? So I made a couple of magic-themed projects, including Fortune Teller, to experiment with aesthetic design, playful interactions, and magic - inspired UI.
 
 ## Gameplay
 - Press the spacebar to advance through dialogue lines
 - Upon the dialogue ending, the camera will zoom to the crystal ball - it may take a second to load in the next part!
 - There are 9 buttons with various types of fortunes on them (luck, studies, love, etc.) Choose the one you would like to hear about and voila!
-- You can ask the crystal ball as many times as you would like but do keep in mind that there are finite answers.
-
+- You can consult the crystal ball as many times as you'd like - just keep in mind that its answers are finite… for now.
+  
 ## Features
 - **Typewriter style dialogue**
 - **Beautiful graphics and art**
-- **Over 90 fortunes** to recieve
+- **Over 90 fortunes** to receive
 - **Future plans** include integration of AI rather than a finite list of answers
 
 ## Gameplay Instructions
@@ -35,3 +38,9 @@ This is a Unity - based 'fortune telling' game that gives ridiculous responses t
 
 **Fonts**
 - [Almendra by Ana Sanfelippo](https://fonts.google.com/specimen/Almendra)
+
+## Built With
+- Unity 6.0.1.11
+- C#
+
+## Created by Anika Rastogi for Shipwrecked Hackathon by Hackclub
