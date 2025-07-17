@@ -27,5 +27,5 @@ This is a Unity - based 'fortune telling' game that gives ridiculous responses t
 - Keyboard click by [CreatorsHome](https://pixabay.com/sound-effects/keyboard-click-327728/) on Pixabay
 - Magic Strike by [freesound_community](https://pixabay.com/sound-effects/magic-strike-5856/) on Pixabay
 
-  **Fonts**
-  - [Almendra by Ana Sanfelippo](https://fonts.google.com/specimen/Almendra)
+**Fonts**
+- [Almendra by Ana Sanfelippo](https://fonts.google.com/specimen/Almendra)
