@@ -1,0 +1,31 @@
+# Fortune Teller
+Upon interacting with the crystal ball, the player will find new threads of fate waiting to be woven... 
+This is a Unity - based 'fortune telling' game that gives ridiculous responses to your inquiries!
+
+## Gameplay
+- Press the spacebar to advance through dialogue lines
+- Upon the dialogue ending, the camera will zoom to the crystal ball - it may take a second to load in the next part!
+- There are 9 buttons with various types of fortunes on them (luck, studies, love, etc.) Choose the one you would like to hear about and voila!
+- You can ask the crystal ball as many times as you would like but do keep in mind that there are finite answers.
+
+## Features
+- **Typewriter style dialogue**
+- **Beautiful graphics and art**
+- **Over 90 fortunes** to recieve
+- **Future plans** include integration of AI rather than a finite list of answers
+
+## Gameplay Instructions
+[Click here to play Fortune Teller on WebGL](https://dronedealer.github.io/Fortune-Teller/)
+
+## Credits
+**Art Assets**
+- Background + crystal ball drawn by DroneDealer
+
+**Music and Sound Effects**
+- Summon them now by [SamuelFJohanns](https://pixabay.com/sound-effects/summon-them-now-114743/) on Pixabay
+- swoosh 3 by [Makoto-AE](https://pixabay.com/sound-effects/swoosh-3-359830/) on Pixabay
+- Keyboard click by [CreatorsHome](https://pixabay.com/sound-effects/keyboard-click-327728/) on Pixabay
+- Magic Strike by [freesound_community](https://pixabay.com/sound-effects/magic-strike-5856/) on Pixabay
+
+  **Fonts**
+  - [Almendra by Ana Sanfelippo](https://fonts.google.com/specimen/Almendra)
