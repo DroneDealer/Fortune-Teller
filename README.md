@@ -17,6 +17,12 @@ This is a Unity - based 'fortune telling' game that gives ridiculous responses t
 ## Gameplay Instructions
 [Click here to play Fortune Teller on WebGL](https://dronedealer.github.io/Fortune-Teller/)
 
+## Gameplay Screenshots
+- [Opening Scene + Dialogue](https://i.postimg.cc/2ynSRdKg/Screenshot-190.png)
+- [Fortune choice menu](https://i.postimg.cc/SQ9sMqxV/Screenshot-200.png)
+- [Fortune Example #1](https://i.postimg.cc/C5pwNBx7/Screenshot-204.png)
+- [Fortune Example #2](https://i.postimg.cc/CKthR6yW/Screenshot-203.png)
+
 ## Credits
 **Art Assets**
 - Background + crystal ball drawn by DroneDealer
