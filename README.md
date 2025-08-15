@@ -5,6 +5,18 @@ Fortune Teller is a Unity-based game that delivers ridiculous responses to your 
 ## Inspiration
 I wanted to learn how to create visually engaging games, and I thought: what better way to do that than with a bit of magic? So I made a couple of magic-themed projects, including Fortune Teller, to experiment with aesthetic design, playful interactions, and magic - inspired UI.
 
+## Development Process
+- Originally wanted to create an AI powered fortune teller but could not properly integrate it
+  - Had to pay for the AI
+  - UI input fields were bugging out
+- Instead decided to provide fortune subclasses for the player to pick from
+  - Each subclass has 10 or more fortunes randomly provided to the player
+
+- Camera zoom was bugging out. This is the only project I have made where I had to use the camera
+  - spent ~5 hours trying to debug only to realize I had coded for World Space canvases instead of Screen Space - Camera
+ 
+- Creating this game familiarized me with the camera and UI management
+
 ## Gameplay
 - Press the spacebar to advance through dialogue lines
 - Upon the dialogue ending, the camera will zoom to the crystal ball - it may take a second to load in the next part!
@@ -44,3 +56,4 @@ I wanted to learn how to create visually engaging games, and I thought: what bet
 - C#
 
 ## Created by Anika Rastogi for Shipwrecked Hackathon by Hackclub
+
